@@ -7,5 +7,8 @@ export default defineNuxtConfig({
     app: {
         baseURL: "/portfolio/",
         buildAssetsDir: "assets"
+    },
+    nitro: {
+        preset: "github-pages"
     }
 })
