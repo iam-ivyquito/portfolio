@@ -138,44 +138,16 @@
                 </div>
 
                 <!-- Portfolio Tab -->
-                <div v-if="activeTab === 'portfolio'" class="space-y-6">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4">My Projects</h2>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div
-                            v-for="project in projects"
-                            :key="project.title"
-                            class="bg-gray-50 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
-                        >
-                            <img :src="project.image" :alt="project.title" class="w-full h-48 object-cover" />
-                            <div class="p-4">
-                                <h3 class="font-bold text-lg mb-2">{{ project.title }}</h3>
-                                <p class="text-gray-600 mb-4">{{ project.description }}</p>
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <div
-                                        v-for="tech in project.technologies"
-                                        :key="tech"
-                                        class="inline-flex items-center rounded-full bg-purple-100 text-purple-600 px-3 py-1 text-sm mr-2 mb-2"
-                                    >
-                                        {{ tech }}
-                                    </div>
-                                </div>
-                                <div class="flex gap-4">
-                                    <a
-                                        :href="project.github"
-                                        class="flex items-center text-gray-600 hover:text-gray-900"
-                                    >
-                                        <Icon name="lucide:github" class="w-5 h-5 mr-1" />
-                                        Code
-                                    </a>
-                                    <a
-                                        :href="project.demo"
-                                        class="flex items-center text-purple-600 hover:text-purple-700"
-                                    >
-                                        <Icon name="lucide:external-link" class="w-5 h-5 mr-1" />
-                                        Live Demo
-                                    </a>
-                                </div>
-                            </div>
+                <div v-if="activeTab === 'projects'" class="space-y-6">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Projects</h2>
+                    <div class="flex flex-col items-center justify-center py-12 px-4 text-center">
+                        <div class="bg-purple-50 rounded-lg p-8 max-w-2xl w-full">
+                            <Icon icon="lucide:construction" class="w-16 h-16 text-purple-600 mx-auto mb-4" />
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Coming Soon</h3>
+                            <p class="text-gray-600">
+                                I'm currently curating my best projects to showcase here. Check back soon to see my
+                                work!
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -351,7 +323,7 @@
     const tabs = [
         { id: "about", name: "About" },
         // { id: "skills", name: "Skills" },
-        { id: "portfolio", name: "Portfolio" },
+        { id: "projects", name: "Projects" },
         { id: "contact", name: "Contact" },
         { id: "credits", name: "Credits" }
     ]
@@ -369,73 +341,6 @@
         { name: "Teamwork", icon: "logos:teamwork", bgColor: "bg-blue-500" },
         { name: "Problem Solving", icon: "logos:problem-solving", bgColor: "bg-green-500" },
         { name: "Adaptability", icon: "logos:adaptability", bgColor: "bg-yellow-500" }
-    ]
-
-    const projects = [
-        {
-            title: "E-commerce Platform",
-            description: "A full-stack e-commerce solution with real-time inventory management.",
-            image: "https://picsum.photos/seed/project1/800/600",
-            technologies: ["Vue.js", "Node.js", "MongoDB"],
-            github: "#",
-            demo: "#"
-        },
-        {
-            title: "Task Management App",
-            description: "A collaborative task management tool with real-time updates.",
-            image: "https://picsum.photos/seed/project2/800/600",
-            technologies: ["React", "Firebase", "Tailwind"],
-            github: "#",
-            demo: "#"
-        },
-        {
-            title: "Weather Dashboard",
-            description: "A weather forecasting application with interactive maps.",
-            image: "https://picsum.photos/seed/project3/800/600",
-            technologies: ["Vue.js", "OpenWeather API", "Chart.js"],
-            github: "#",
-            demo: "#"
-        },
-        {
-            title: "Social Media Analytics",
-            description: "Analytics dashboard for social media performance tracking.",
-            image: "https://picsum.photos/seed/project4/800/600",
-            technologies: ["Nuxt.js", "Python", "PostgreSQL"],
-            github: "#",
-            demo: "#"
-        },
-        {
-            title: "E-commerce Platform",
-            description: "A full-stack e-commerce solution with real-time inventory management.",
-            image: "https://picsum.photos/seed/project1/800/600",
-            technologies: ["Vue.js", "Node.js", "MongoDB"],
-            github: "#",
-            demo: "#"
-        },
-        {
-            title: "Task Management App",
-            description: "A collaborative task management tool with real-time updates.",
-            image: "https://picsum.photos/seed/project2/800/600",
-            technologies: ["React", "Firebase", "Tailwind"],
-            github: "#",
-            demo: "#"
-        },
-        {
-            title: "Weather Dashboard",
-            description: "A weather forecasting application with interactive maps.",
-            image: "https://picsum.photos/seed/project3/800/600",
-            technologies: ["Vue.js", "OpenWeather API", "Chart.js"],
-            github: "#",
-            demo: "#"
-        },
-        {
-            title: "Social Media Analytics",
-            description: "Analytics dashboard for social media performance tracking.",
-            image: "https://picsum.photos/seed/project4/800/600",
-            technologies: ["Nuxt.js", "Python", "PostgreSQL"],
-            github: "#",
-            demo: "#"
-        }
     ]
 
     const experiences = [
