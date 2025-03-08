@@ -106,7 +106,7 @@
                                 <p class="text-gray-600 mb-4">
                                     {{ experience.description }}
                                 </p>
-                                <div class="flex flex-wrap items-center justify-end gap-2 my-3">
+                                <!-- <div class="flex flex-wrap items-center justify-end gap-2 my-3">
                                     <span
                                         v-for="tech in experience.technologies"
                                         :key="tech"
@@ -114,7 +114,7 @@
                                     >
                                         {{ tech }}
                                     </span>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -185,7 +185,7 @@
                     <h2 class="text-2xl font-bold text-gray-900 mb-4">Get in Touch</h2>
                     <div class="grid md:grid-cols-2 gap-6 mb-8">
                         <div class="flex items-center space-x-4">
-                            <Icon name="lucide:mail" class="w-6 h-6 text-purple-600" />
+                            <Icon icon="lucide:mail" class="w-6 h-6 text-purple-600" />
                             <div>
                                 <p class="text-sm text-gray-500">Email</p>
                                 <a href="mailto:iam.ivyquito@gmail.com" class="text-gray-900 hover:text-purple-600">
@@ -194,7 +194,7 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <Icon name="lucide:linkedin" class="w-6 h-6 text-purple-600" />
+                            <Icon icon="lucide:linkedin" class="w-6 h-6 text-purple-600" />
                             <div>
                                 <p class="text-sm text-gray-500">LinkedIn</p>
                                 <a
@@ -207,10 +207,80 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <Icon name="lucide:map-pin" class="w-6 h-6 text-purple-600" />
+                            <Icon icon="lucide:map-pin" class="w-6 h-6 text-purple-600" />
                             <div>
                                 <p class="text-sm text-gray-500">Location</p>
                                 <p class="text-gray-900">{{ profileData.location }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Credits Tab -->
+                <div v-if="activeTab === 'credits'" class="space-y-6">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Credits & Attributions</h2>
+                    <div class="space-y-8">
+                        <!-- Avatar -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Avatar</h3>
+                            <div class="flex items-start space-x-4">
+                                <img
+                                    :src="profileData.image"
+                                    alt="Avatar Preview"
+                                    class="w-16 h-16 rounded-full border-2 border-white shadow-md"
+                                />
+                                <div>
+                                    <p class="text-gray-600">
+                                        Created using
+                                        <a
+                                            href="https://www.dicebear.com/styles/adventurer"
+                                            target="_blank"
+                                            class="text-purple-600 hover:text-purple-700"
+                                            >DiceBear Adventurer</a
+                                        >
+                                        style
+                                    </p>
+                                    <p class="text-sm text-gray-500 mt-1">
+                                        Designed by
+                                        <span class="font-medium">Lisa Wischofsky</span>
+                                        under
+                                        <a
+                                            href="https://creativecommons.org/licenses/by/4.0/"
+                                            target="_blank"
+                                            class="text-purple-600 hover:text-purple-700"
+                                            >CC BY 4.0</a
+                                        >
+                                        license
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Icons -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Icons</h3>
+                            <div class="space-y-2">
+                                <p class="text-gray-600">Icons provided by:</p>
+                                <ul class="list-disc list-inside space-y-1 text-gray-600 ml-4">
+                                    <li>
+                                        <a
+                                            href="https://lucide.dev/"
+                                            target="_blank"
+                                            class="text-purple-600 hover:text-purple-700"
+                                            >Lucide Icons</a
+                                        >
+                                        - UI Icons
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="https://icon-sets.iconify.design/logos/"
+                                            target="_blank"
+                                            class="text-purple-600 hover:text-purple-700"
+                                            >Iconify Logos</a
+                                        >
+                                        - Technology Logos
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -224,6 +294,14 @@
                 <p class="text-center text-gray-500">
                     © {{ new Date().getFullYear() }} {{ profileData.shortName }}. All rights reserved.
                 </p>
+                <p class="text-center text-xs text-gray-400 mt-1">
+                    Avatar by
+                    <a href="https://www.dicebear.com/styles/adventurer" class="hover:text-purple-600"
+                        >Lisa Wischofsky</a
+                    >
+                    /
+                    <a href="https://creativecommons.org/licenses/by/4.0/" class="hover:text-purple-600">CC BY 4.0</a>
+                </p>
             </div>
         </footer>
     </div>
@@ -231,6 +309,7 @@
 
 <script setup>
     import { ref, onMounted, onUnmounted } from "vue"
+    import { Icon } from "@iconify/vue"
 
     const profileData = {
         name: "Ivy Marie Quito",
@@ -269,17 +348,12 @@
         })
     })
 
-    const formData = ref({
-        name: "",
-        email: "",
-        message: ""
-    })
-
     const tabs = [
         { id: "about", name: "About" },
         // { id: "skills", name: "Skills" },
         { id: "portfolio", name: "Portfolio" },
-        { id: "contact", name: "Contact" }
+        { id: "contact", name: "Contact" },
+        { id: "credits", name: "Credits" }
     ]
 
     const skills = [
@@ -370,52 +444,83 @@
             duration: "2019 - Present",
             description:
                 "Worked on multiple projects with different clients, using Vue.js and Node.js. Maintained and updated the technical logic for the optimization of the website. Leveraging the latest technologies and best practices to ensure the website is fast, secure, and scalable.",
-            technologies: ["Vue.js", "Node.js", "TypeScript", "Tailwind CSS"]
+            technologies: [
+                "Vue",
+                "Node",
+                "TypeScript",
+                "TailwindCSS",
+                "JQuery",
+                "Pinia",
+                "Lodash.js",
+                "Github",
+                "HTML",
+                "S/CSS",
+                "Wordpress",
+                "Ajax",
+                "RestfulAPI",
+                "NuxtJS",
+                "Vuetify",
+                "Bootstrap",
+                "RestfulAPI"
+            ]
         },
         {
             title: "Senior Frontend Developer/Contractor - ZEA Informatique Inc.",
             duration: "2023 - 2024",
             description:
                 "Led the development of a web application reservation system for clients in the hospitality industry. Leveraging the the use of Component libraries like Vuetify that are used to create a consistent and professional look and feel for the website.",
-            technologies: ["Vue.js", "Vuetify", "JavaScript", "REST API"]
+            technologies: [
+                "Vue",
+                "Vuetify",
+                "JavaScript",
+                "REST API",
+                "JQuery",
+                "Pinia",
+                "Typescript",
+                "S/CSS",
+                "Github",
+                "Lodash.js",
+                "Node.js",
+                "HTML"
+            ]
         },
         {
             title: "Software Developer - Vauldex Inc",
             duration: "2016 - 2019",
             description:
                 "Handled the development of the company's support website and other internal tools. Maintained and updated the website content.",
-            technologies: ["Vue.js", "JavaScript", "HTML5", "CSS3"]
+            technologies: [
+                "Vue",
+                "JavaScript",
+                "HTML5",
+                "S/CSS",
+                "JQuery",
+                "GitLab",
+                "Lodash.js",
+                "Vuetify",
+                "Node.js",
+                "PostgreSQL"
+            ]
         },
         {
             title: "Wordpress Developer - Proweaver Inc.",
             duration: "2016 - 2016",
             description:
                 "Focused on developing & converting complex Xara files into fully responsive WordPress CMS websites.",
-            technologies: ["WordPress", "PHP", "MySQL", "JavaScript"]
+            technologies: ["WordPress", "HTML", "JavaScript", "CSS"]
         },
         {
             title: "Junior Software Engineer - IXBase Inc.",
             duration: "2015 - 2016",
             description:
                 "Spearheaded the development of a comprehensive POS Web Application System tailored for local small to medium businesses.",
-            technologies: ["PHP", "MySQL", "JavaScript", "jQuery"]
+            technologies: ["PHP", "MySQL", "JavaScript", "jQuery", "HTML", "CSS"]
         },
         {
             title: "PHP Developer - OutSourceSG",
             duration: "2015 - 2015",
             description: "Engineered a comprehensive system integrator utilizing PHP, MySQL, and JavaScript.",
-            technologies: ["PHP", "MySQL", "JavaScript", "CSV Integration"]
+            technologies: ["PHP", "HTML", "JavaScript", "MySQL", "Database Structure", "Ajax"]
         }
     ]
-
-    const handleSubmit = () => {
-        // Handle form submission
-        console.log("Form submitted:", formData.value)
-        // Reset form
-        formData.value = {
-            name: "",
-            email: "",
-            message: ""
-        }
-    }
 </script>
