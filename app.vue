@@ -13,30 +13,11 @@
                                 :src="profileData.image"
                                 alt="Profile Picture"
                             />
-                            <h1 class="mt-4 text-3xl font-bold text-gray-900">{{ profileData.name }}</h1>
-                            <p class="text-gray-600">{{ profileData.location }}</p>
-                            <div class="mt-4 flex space-x-4">
-                                <!-- <a
-                  href="#"
-                  class="text-gray-400 hover:text-purple-600 transform hover:scale-110 transition-all duration-300"
-                >
-                  <Icon name="lucide:github" class="w-6 h-6" />
-                </a>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-purple-600 transform hover:scale-110 transition-all duration-300"
-                >
-                  <Icon name="lucide:twitter" class="w-6 h-6" />
-                </a>
-              -->
-                                <a
-                                    href="www.linkedin.com/in/iam-ivyquito"
-                                    target="_blank"
-                                    class="text-gray-400 hover:text-purple-600 transform hover:scale-110 transition-all duration-300"
-                                >
-                                    <Icon name="lucide:linkedin" class="w-6 h-6" />
-                                </a>
-                            </div>
+                            <h1 class="mt-4 text-3xl font-bold text-gray-900">
+                                <span>{{ profileData.name }}</span>
+                            </h1>
+                            <p class="text-gray-600">{{ profileData.title }}</p>
+                            <p class="text-gray-500 text-sm">{{ profileData.location }}</p>
                             <div class="mt-4">
                                 <!-- Tabs Navigation -->
                                 <div class="flex justify-center">
@@ -46,7 +27,7 @@
                                             :key="tab.id"
                                             @click="activeTab = tab.id"
                                             :class="[
-                                                'px-4 py-2 rounded-md text-sm font-medium transition-colors',
+                                                'px-4 py-2 rounded-md text-sm font-medium transition-colors hover:bg-purple-600 hover:text-white',
                                                 activeTab === tab.id
                                                     ? 'bg-purple-600 text-white'
                                                     : 'text-gray-600 hover:text-gray-900'
@@ -75,7 +56,12 @@
                                 :src="profileData.image"
                                 alt="Profile Picture"
                             />
-                            <h2 class="text-lg font-semibold text-gray-900">{{ profileData.name }}</h2>
+                            <div>
+                                <h2 class="text-lg font-semibold text-gray-900">
+                                    <span class="hidden sm:inline">{{ profileData.name }}</span>
+                                    <span class="sm:hidden">{{ profileData.shortName }}</span>
+                                </h2>
+                            </div>
                         </div>
                         <nav class="flex space-x-2">
                             <button
@@ -97,11 +83,8 @@
             </div>
         </header>
 
-        <!-- Add spacing for content -->
-        <div class="h-8"></div>
-
         <!-- Main Content with Tabs -->
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mb-12">
             <!-- Tab Content -->
             <div class="bg-white rounded-lg shadow-sm p-6">
                 <!-- About Tab -->
@@ -120,21 +103,19 @@
                             >
                                 <h4 class="font-bold">{{ experience.title }}</h4>
                                 <p class="text-gray-600">{{ experience.duration }}</p>
-                                <p class="text-gray-600">
+                                <p class="text-gray-600 mb-4">
                                     {{ experience.description }}
                                 </p>
+                                <div class="flex flex-wrap items-center justify-end gap-2 my-3">
+                                    <span
+                                        v-for="tech in experience.technologies"
+                                        :key="tech"
+                                        class="inline-flex items-center rounded-full bg-purple-100 text-purple-600 px-3 py-1 text-sm"
+                                    >
+                                        {{ tech }}
+                                    </span>
+                                </div>
                             </div>
-                            <!-- <div class="border-l-2 border-purple-600 pl-4">
-                               
-                            </div>
-                            <div class="border-l-2 border-purple-600 pl-4">
-                                <h4 class="font-bold">Senior Frontend Developer/Contractor - ZEA Informatique Inc.</h4>
-                                <p class="text-gray-600">2023 - 2024</p>
-                                <p class="text-gray-600">
-                                    Led the development of a web application reservation system for clients in the
-                                    hospitality industry.
-                                </p>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -146,17 +127,12 @@
                         <div
                             v-for="skill in skills"
                             :key="skill.name"
-                            class="bg-gray-50 p-4 rounded-lg hover:shadow-md transition-shadow"
+                            class="flex items-center space-x-2 bg-white rounded-full px-4 py-2 shadow-sm hover:shadow-md transition-shadow"
                         >
-                            <div class="flex items-center space-x-2">
-                                <div
-                                    class="w-8 h-8 rounded-full flex items-center justify-center"
-                                    :class="skill.bgColor"
-                                >
-                                    <Icon :name="skill.icon" class="w-5 h-5 text-white" />
-                                </div>
-                                <span class="font-medium text-gray-800">{{ skill.name }}</span>
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center" :class="skill.bgColor">
+                                <Icon :name="skill.icon" class="w-5 h-5 text-white" />
                             </div>
+                            <span class="font-medium text-gray-800">{{ skill.name }}</span>
                         </div>
                     </div>
                 </div>
@@ -175,13 +151,13 @@
                                 <h3 class="font-bold text-lg mb-2">{{ project.title }}</h3>
                                 <p class="text-gray-600 mb-4">{{ project.description }}</p>
                                 <div class="flex flex-wrap gap-2 mb-4">
-                                    <span
+                                    <div
                                         v-for="tech in project.technologies"
                                         :key="tech"
-                                        class="bg-purple-100 text-purple-600 px-2 py-1 rounded-full text-sm"
+                                        class="inline-flex items-center rounded-full bg-purple-100 text-purple-600 px-3 py-1 text-sm mr-2 mb-2"
                                     >
                                         {{ tech }}
-                                    </span>
+                                    </div>
                                 </div>
                                 <div class="flex gap-4">
                                     <a
@@ -218,6 +194,19 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
+                            <Icon name="lucide:linkedin" class="w-6 h-6 text-purple-600" />
+                            <div>
+                                <p class="text-sm text-gray-500">LinkedIn</p>
+                                <a
+                                    :href="profileData.linkedin"
+                                    target="_blank"
+                                    class="text-gray-900 hover:text-purple-600"
+                                >
+                                    iam.ivyquito
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
                             <Icon name="lucide:map-pin" class="w-6 h-6 text-purple-600" />
                             <div>
                                 <p class="text-sm text-gray-500">Location</p>
@@ -225,55 +214,13 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Contact Form -->
-                    <form @submit.prevent="handleSubmit" class="space-y-4">
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                                <input
-                                    id="name"
-                                    v-model="formData.name"
-                                    type="text"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                                <input
-                                    id="email"
-                                    v-model="formData.email"
-                                    type="email"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
-                                    required
-                                />
-                            </div>
-                        </div>
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-                            <textarea
-                                id="message"
-                                v-model="formData.message"
-                                rows="4"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
-                                required
-                            ></textarea>
-                        </div>
-                        <button
-                            type="submit"
-                            class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors"
-                        >
-                            Send Message
-                        </button>
-                    </form>
                 </div>
             </div>
         </main>
 
         <!-- Footer -->
         <footer class="bg-white border-t border-gray-200 mt-12 fixed w-screen bottom-0">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
                 <p class="text-center text-gray-500">
                     © {{ new Date().getFullYear() }} {{ profileData.shortName }}. All rights reserved.
                 </p>
@@ -293,7 +240,8 @@
         location: "Cebu City, Philippines",
         image: "https://api.dicebear.com/9.x/adventurer/svg?seed=Kingston&flip=true&glasses=variant02,variant04&glassesProbability=100&hair=long06&hairColor=0e0e0e,562306",
         description:
-            "Hey there! I am a Senior Frontend Developer with 10 years of experience in the industry, for the last 6 years I have been focusing on specializing in the frontend side of the development. I am a passionate developer who enjoys coding and create user-friendly experiences that helps clients grow their business, reaching more people and making their business more successful."
+            "Hey there! I am a Senior Frontend Developer with 10 years of experience in the industry, for the last 6 years I have been focusing on specializing in the frontend side of the development. I am a passionate developer who enjoys coding and create user-friendly experiences that helps clients grow their business, reaching more people and making their business more successful.",
+        linkedin: "https://www.linkedin.com/in/iam-ivyquito"
     }
     const activeTab = ref("about")
     const isHeaderVisible = ref(true)
@@ -329,7 +277,7 @@
 
     const tabs = [
         { id: "about", name: "About" },
-        { id: "skills", name: "Skills" },
+        // { id: "skills", name: "Skills" },
         { id: "portfolio", name: "Portfolio" },
         { id: "contact", name: "Contact" }
     ]
@@ -340,6 +288,13 @@
         { name: "Node.js", icon: "logos:nodejs", bgColor: "bg-green-600" },
         { name: "Javascript", icon: "logos:javascript", bgColor: "bg-yellow-500" },
         { name: "Git", icon: "logos:git-icon", bgColor: "bg-red-500" }
+    ]
+
+    const softSkills = [
+        { name: "Communication", icon: "logos:communication", bgColor: "bg-purple-500" },
+        { name: "Teamwork", icon: "logos:teamwork", bgColor: "bg-blue-500" },
+        { name: "Problem Solving", icon: "logos:problem-solving", bgColor: "bg-green-500" },
+        { name: "Adaptability", icon: "logos:adaptability", bgColor: "bg-yellow-500" }
     ]
 
     const projects = [
@@ -414,34 +369,42 @@
             title: "Senior Frontend Developer - Full Scale Teams",
             duration: "2019 - Present",
             description:
-                "Worked on multiple projects with different clients, using Vue.js and Node.js. Maintained and updated the technical logic for the optimization of the website. Leveraging the latest technologies and best practices to ensure the website is fast, secure, and scalable."
+                "Worked on multiple projects with different clients, using Vue.js and Node.js. Maintained and updated the technical logic for the optimization of the website. Leveraging the latest technologies and best practices to ensure the website is fast, secure, and scalable.",
+            technologies: ["Vue.js", "Node.js", "TypeScript", "Tailwind CSS"]
         },
         {
             title: "Senior Frontend Developer/Contractor - ZEA Informatique Inc.",
             duration: "2023 - 2024",
             description:
-                "Led the development of a web application reservation system for clients in the hospitality industry."
+                "Led the development of a web application reservation system for clients in the hospitality industry. Leveraging the the use of Component libraries like Vuetify that are used to create a consistent and professional look and feel for the website.",
+            technologies: ["Vue.js", "Vuetify", "JavaScript", "REST API"]
         },
         {
             title: "Software Developer - Vauldex Inc",
             duration: "2016 - 2019",
             description:
-                "Handled the development of the company's support website and other internal tools. Maintained and updated the website content."
+                "Handled the development of the company's support website and other internal tools. Maintained and updated the website content.",
+            technologies: ["Vue.js", "JavaScript", "HTML5", "CSS3"]
         },
         {
             title: "Wordpress Developer - Proweaver Inc.",
             duration: "2016 - 2016",
-            description: "-"
+            description:
+                "Focused on developing & converting complex Xara files into fully responsive WordPress CMS websites.",
+            technologies: ["WordPress", "PHP", "MySQL", "JavaScript"]
         },
         {
             title: "Junior Software Engineer - IXBase Inc.",
             duration: "2015 - 2016",
-            description: "-"
+            description:
+                "Spearheaded the development of a comprehensive POS Web Application System tailored for local small to medium businesses.",
+            technologies: ["PHP", "MySQL", "JavaScript", "jQuery"]
         },
         {
             title: "PHP Developer - OutSourceSG",
             duration: "2015 - 2015",
-            description: "-"
+            description: "Engineered a comprehensive system integrator utilizing PHP, MySQL, and JavaScript.",
+            technologies: ["PHP", "MySQL", "JavaScript", "CSV Integration"]
         }
     ]
 
