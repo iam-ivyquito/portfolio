@@ -142,7 +142,7 @@
                     <h2 class="text-2xl font-bold text-gray-900 mb-4">Projects</h2>
                     <div class="flex flex-col items-center justify-center py-12 px-4 text-center">
                         <div class="bg-purple-50 rounded-lg p-8 max-w-2xl w-full">
-                            <Icon icon="lucide:construction" class="w-16 h-16 text-purple-600 mx-auto mb-4" />
+                            <Icon name="lucide:construction" class="w-16 h-16 text-purple-600 mx-auto mb-4" />
                             <h3 class="text-xl font-semibold text-gray-900 mb-2">Coming Soon</h3>
                             <p class="text-gray-600">
                                 I'm currently curating my best projects to showcase here. Check back soon to see my
