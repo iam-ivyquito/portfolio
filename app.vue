@@ -281,7 +281,6 @@
 
 <script setup>
     import { ref, onMounted, onUnmounted } from "vue"
-    import { Icon } from "@iconify/vue"
 
     const profileData = {
         name: "Ivy Marie Quito",
