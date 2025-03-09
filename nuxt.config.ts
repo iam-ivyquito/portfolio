@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
     compatibilityDate: "2024-11-01",
     devtools: { enabled: true },
-    modules: ["@nuxtjs/tailwindcss", "nuxt-icon"],
+    modules: ["@nuxtjs/tailwindcss", "@nuxt/icon"],
     ssr: false,
     app: {
         head: {
@@ -19,16 +19,13 @@ export default defineNuxtConfig({
     nitro: {
         preset: "github-pages"
     },
+    // Add explicit configuration for icons
     nuxtIcon: {
         size: "24px",
         class: "icon",
-        aliases: {
-            nuxt: "logos:nuxt-icon",
-            vue: "logos:vue",
-            typescript: "logos:typescript-icon",
-            nodejs: "logos:nodejs",
-            javascript: "logos:javascript",
-            git: "logos:git-icon"
+        icons: {
+            logos: true,
+            lucide: true
         }
     }
 })

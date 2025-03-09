@@ -137,7 +137,7 @@
                     </div>
                 </div>
 
-                <!-- Portfolio Tab -->
+                <!-- Projects Tab -->
                 <div v-if="activeTab === 'projects'" class="space-y-6">
                     <h2 class="text-2xl font-bold text-gray-900 mb-4">Projects</h2>
                     <div class="flex flex-col items-center justify-center py-12 px-4 text-center">
@@ -157,7 +157,7 @@
                     <h2 class="text-2xl font-bold text-gray-900 mb-4">Get in Touch</h2>
                     <div class="grid md:grid-cols-2 gap-6 mb-8">
                         <div class="flex items-center space-x-4">
-                            <Icon icon="lucide:mail" class="w-6 h-6 text-purple-600" />
+                            <Icon name="lucide:mail" class="w-6 h-6 text-purple-600" />
                             <div>
                                 <p class="text-sm text-gray-500">Email</p>
                                 <a href="mailto:iam.ivyquito@gmail.com" class="text-gray-900 hover:text-purple-600">
@@ -166,7 +166,7 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <Icon icon="lucide:linkedin" class="w-6 h-6 text-purple-600" />
+                            <Icon name="lucide:linkedin" class="w-6 h-6 text-purple-600" />
                             <div>
                                 <p class="text-sm text-gray-500">LinkedIn</p>
                                 <a
@@ -179,7 +179,7 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <Icon icon="lucide:map-pin" class="w-6 h-6 text-purple-600" />
+                            <Icon name="lucide:map-pin" class="w-6 h-6 text-purple-600" />
                             <div>
                                 <p class="text-sm text-gray-500">Location</p>
                                 <p class="text-gray-900">{{ profileData.location }}</p>
