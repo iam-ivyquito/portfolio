@@ -20,7 +20,7 @@ export default defineNuxtConfig({
         preset: "github-pages"
     },
     // Add explicit configuration for icons
-    nuxtIcon: {
+    icon: {
         size: "24px",
         class: "icon",
         icons: {
