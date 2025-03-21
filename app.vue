@@ -64,19 +64,28 @@
                             </div>
                         </div>
                         <nav class="flex space-x-2">
-                            <button
-                                v-for="tab in tabs"
-                                :key="tab.id"
-                                @click="activeTab = tab.id"
-                                :class="[
-                                    'px-3 py-1 rounded-md text-sm font-medium transition-colors',
-                                    activeTab === tab.id
-                                        ? 'bg-purple-600 text-white'
-                                        : 'text-gray-600 hover:text-gray-900'
-                                ]"
-                            >
-                                {{ tab.name }}
-                            </button>
+                            <div class="relative inline-block text-left">
+                                <div>
+                                    <button type="button" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true" @click.prevent="openMenu = !openMenu">
+                                    Menu
+                                    </button>
+                                </div>
+                                <div v-if="openMenu" class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                                    <div class="py-1" role="none">
+                                        <button
+                                            v-for="tab in tabs"
+                                            :key="tab.id"
+                                            @click="activeTab = tab.id"
+                                            :class="[
+                                                'block px-4 py-2 text-sm text-gray-700 w-full text-left',
+                                                { 'bg-purple-600 text-white' : activeTab === tab.id }
+                                            ]"
+                                        >
+                                            {{ tab.name }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </nav>
                     </div>
                 </div>
@@ -106,15 +115,6 @@
                                 <p class="text-gray-600 mb-4">
                                     {{ experience.description }}
                                 </p>
-                                <!-- <div class="flex flex-wrap items-center justify-end gap-2 my-3">
-                                    <span
-                                        v-for="tech in experience.technologies"
-                                        :key="tech"
-                                        class="inline-flex items-center rounded-full bg-purple-100 text-purple-600 px-3 py-1 text-sm"
-                                    >
-                                        {{ tech }}
-                                    </span>
-                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                                     target="_blank"
                                     class="text-gray-900 hover:text-purple-600"
                                 >
-                                    iam.ivyquito
+                                    {{ profileData.username }}
                                 </a>
                             </div>
                         </div>
@@ -192,6 +192,21 @@
                 <div v-if="activeTab === 'credits'" class="space-y-6">
                     <h2 class="text-2xl font-bold text-gray-900 mb-4">Credits & Attributions</h2>
                     <div class="space-y-8">
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-3">For my complexity, motivation, design...</h3>
+                            <div class="flex items-start space-x-4">
+                                <p>
+                                    <span class="text-lg font-bold">God the Father</span>; Provider, Promise keeper
+                                </p>
+                                <p>
+                                    <span class="text-lg font-bold">God the Son</span>; my Lord & Savior Jesus Christ
+                                </p>
+                                <p>
+                                    <span class="text-lg font-bold">God the Holy Spirit</span>; my Bestfriend
+                                </p>
+                            </div>
+                        </div>
+
                         <!-- Avatar -->
                         <div class="bg-gray-50 rounded-lg p-6">
                             <h3 class="text-lg font-semibold text-gray-900 mb-3">Avatar</h3>
@@ -280,22 +295,24 @@
 </template>
 
 <script setup>
-    import { ref, onMounted, onUnmounted } from "vue"
+    import { ref, onMounted, onUnmounted, watch } from "vue"
 
     const profileData = {
         name: "Ivy Marie Quito",
         shortName: "IQuito",
         title: "Senior Frontend Developer",
+        username: "iam.ivyquito",
         email: "iam.ivyquito@gmail.com",
         location: "Cebu City, Philippines",
         image: "https://api.dicebear.com/9.x/adventurer/svg?seed=Kingston&flip=true&glasses=variant02,variant04&glassesProbability=100&hair=long06&hairColor=0e0e0e,562306",
         description:
-            "Hey there! I am a Senior Frontend Developer with 10 years of experience in the industry, for the last 6 years I have been focusing on specializing in the frontend side of the development. I am a passionate developer who enjoys coding and create user-friendly experiences that helps clients grow their business, reaching more people and making their business more successful.",
+            "Hey there! I am a Senior Frontend Developer with 10 years of experience in the industry, for the last 6 years I found myself enjoying the journey on specializing in the frontend side of the development. I really enjoy developing user-friendly web applications with the focus on user-centric experiences that helps clients grow their business, reaching more people and making their business more successful.",
         linkedin: "https://www.linkedin.com/in/iam-ivyquito"
     }
     const activeTab = ref("about")
     const isHeaderVisible = ref(true)
     const originalHeader = ref(null)
+    const openMenu = ref(false);
 
     onMounted(() => {
         const observer = new IntersectionObserver(
@@ -427,4 +444,10 @@
             technologies: ["PHP", "HTML", "JavaScript", "MySQL", "Database Structure", "Ajax"]
         }
     ]
+
+    watch(() => isHeaderVisible.value, (isVisible)=> {
+        if (isHeaderVisible.value) {
+            openMenu.value = false;
+        }
+    })
 </script>
