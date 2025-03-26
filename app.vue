@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-gray-50">
+    <div class="min-h-screen bg-gray-50 min-w-[450px]">
         <!-- Hero Section -->
         <header>
             <!-- Original Header -->
@@ -66,11 +66,25 @@
                         <nav class="flex space-x-2">
                             <div class="relative inline-block text-left">
                                 <div>
-                                    <button type="button" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true" @click.prevent="openMenu = !openMenu">
-                                    Menu
+                                    <button
+                                        type="button"
+                                        class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50"
+                                        id="menu-button"
+                                        aria-expanded="true"
+                                        aria-haspopup="true"
+                                        @click.prevent="openMenu = !openMenu"
+                                    >
+                                        Menu
                                     </button>
                                 </div>
-                                <div v-if="openMenu" class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                                <div
+                                    v-if="openMenu"
+                                    class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden"
+                                    role="menu"
+                                    aria-orientation="vertical"
+                                    aria-labelledby="menu-button"
+                                    tabindex="-1"
+                                >
                                     <div class="py-1" role="none">
                                         <button
                                             v-for="tab in tabs"
@@ -78,7 +92,7 @@
                                             @click="activeTab = tab.id"
                                             :class="[
                                                 'block px-4 py-2 text-sm text-gray-700 w-full text-left',
-                                                { 'bg-purple-600 text-white' : activeTab === tab.id }
+                                                { 'bg-purple-600 text-white': activeTab === tab.id }
                                             ]"
                                         >
                                             {{ tab.name }}
@@ -193,17 +207,21 @@
                     <h2 class="text-2xl font-bold text-gray-900 mb-4">Credits & Attributions</h2>
                     <div class="space-y-8">
                         <div class="bg-gray-50 rounded-lg p-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-3">For my complexity, motivation, design...</h3>
-                            <div class="flex items-start space-x-4">
-                                <p>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-3">
+                                For my complexity, motivation, design...
+                            </h3>
+                            <div
+                                class="ms-6 block space-x-0 sm:text-left md:flex md:space-x-6 md:text-center items-start"
+                            >
+                                <div class="w-full my-2">
                                     <span class="text-lg font-bold">God the Father</span>; Provider, Promise keeper
-                                </p>
-                                <p>
+                                </div>
+                                <div class="w-full my-2">
                                     <span class="text-lg font-bold">God the Son</span>; my Lord & Savior Jesus Christ
-                                </p>
-                                <p>
+                                </div>
+                                <div class="w-full my-2">
                                     <span class="text-lg font-bold">God the Holy Spirit</span>; my Bestfriend
-                                </p>
+                                </div>
                             </div>
                         </div>
 
@@ -312,7 +330,7 @@
     const activeTab = ref("about")
     const isHeaderVisible = ref(true)
     const originalHeader = ref(null)
-    const openMenu = ref(false);
+    const openMenu = ref(false)
 
     onMounted(() => {
         const observer = new IntersectionObserver(
@@ -445,9 +463,12 @@
         }
     ]
 
-    watch(() => isHeaderVisible.value, (isVisible)=> {
-        if (isHeaderVisible.value) {
-            openMenu.value = false;
+    watch(
+        () => isHeaderVisible.value,
+        isVisible => {
+            if (isHeaderVisible.value) {
+                openMenu.value = false
+            }
         }
-    })
+    )
 </script>
