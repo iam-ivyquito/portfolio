@@ -17,7 +17,7 @@
                                 <span>{{ profileData.name }}</span>
                             </h1>
                             <p class="text-gray-600">{{ profileData.title }}</p>
-                            <p class="text-gray-500 text-sm">{{ profileData.location }}</p>
+                            <!-- <p class="text-gray-500 text-sm">{{ profileData.location }}</p> -->
                             <div class="mt-4">
                                 <!-- Tabs Navigation -->
                                 <div class="flex justify-center">
@@ -72,9 +72,9 @@
                                         id="menu-button"
                                         aria-expanded="true"
                                         aria-haspopup="true"
-                                        @click.prevent="openMenu = !openMenu"
                                     >
-                                        Menu
+                                        <Icon v-if="!openMenu" name="lucide:menu" class="menu-icon w-5 h-5 text-gray" />
+                                        <Icon v-else name="lucide:x" class="menu-icon w-5 h-5 text-gray" />
                                     </button>
                                 </div>
                                 <div
@@ -113,41 +113,66 @@
                 <!-- About Tab -->
                 <div v-if="activeTab === 'about'" class="space-y-6">
                     <div class="prose max-w-none">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-4">About Me</h2>
-                        <p class="text-gray-600 leading-relaxed">
-                            {{ profileData.description }}
-                        </p>
-                        <h3 class="text-xl font-bold text-gray-900 mt-6 mb-3">Experience</h3>
-                        <div class="space-y-4">
-                            <div
-                                v-for="experience in experiences"
-                                :key="experience.title"
-                                class="border-l-2 border-purple-600 pl-4"
-                            >
-                                <h4 class="font-bold">{{ experience.title }}</h4>
-                                <p class="text-gray-600">{{ experience.duration }}</p>
-                                <p class="text-gray-600 mb-4">
-                                    {{ experience.description }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        <h1 class="text-2xl font-bold text-gray-900 mb-4">About Me</h1>
+                        <p class="text-gray-600 leading-relaxed" v-html="profileData.description" />
 
-                <!-- Skills Tab -->
-                <div v-if="activeTab === 'skills'" class="space-y-6">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Skills & Expertise</h2>
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <div
-                            v-for="skill in skills"
-                            :key="skill.name"
-                            class="flex items-center space-x-2 bg-white rounded-full px-4 py-2 shadow-sm hover:shadow-md transition-shadow"
-                        >
-                            <div class="w-8 h-8 rounded-full flex items-center justify-center" :class="skill.bgColor">
-                                <Icon :name="skill.icon" class="w-5 h-5 text-white" />
+                        <hr class="my-6" />
+
+                        <section>
+                            <h1 class="text-2xl font-bold text-gray-900 mb-4">Experience</h1>
+                            <div class="space-y-4">
+                                <div
+                                    v-for="experience in toListExperience"
+                                    :key="experience.title"
+                                    class="border-l-2 border-purple-600 pl-4"
+                                >
+                                    <h4 class="font-bold">{{ experience.title }}</h4>
+                                    <p class="text-gray-600">{{ experience.duration }}</p>
+                                    <p class="text-gray-600 mb-4">
+                                        {{ experience.description }}
+                                    </p>
+                                </div>
                             </div>
-                            <span class="font-medium text-gray-800">{{ skill.name }}</span>
-                        </div>
+                            <div class="button-holder text-center">
+                                <button
+                                    class="px-4 py-2 text-sm text-gray-700"
+                                    @click.prevent="showMoreExperience = !showMoreExperience"
+                                >
+                                    <Icon
+                                        v-if="!showMoreExperience"
+                                        name="lucide:chevrons-down"
+                                        class="w-6 h-6 text-purple-600 font-bold animate-bounce"
+                                    />
+                                    <Icon v-else name="lucide:chevrons-up" class="w-6 h-6 text-purple-600 font-bold" />
+                                </button>
+                            </div>
+                        </section>
+
+                        <hr class="my-6" />
+                        <section>
+                            <h1 class="text-2xl font-bold text-gray-900 mb-4">Skills & Expertise</h1>
+                            <h2 class="text-lg font-bold text-gray-900">Tech Stack</h2>
+                            <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-6">
+                                <div
+                                    v-for="skill in skills"
+                                    :key="skill"
+                                    class="flex items-center space-x-2 px-4 py-2 justify-center"
+                                >
+                                    <span class="font-medium text-gray-800">{{ skill }}</span>
+                                </div>
+                            </div>
+
+                            <h2 class="text-lg font-bold text-gray-900">Soft Skills</h2>
+                            <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                                <div
+                                    v-for="skill in softSkills"
+                                    :key="skill"
+                                    class="flex items-center space-x-2 px-4 py-2 justify-center"
+                                >
+                                    <span class="font-medium text-gray-800">{{ skill }}</span>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
 
@@ -227,7 +252,6 @@
 
                         <!-- Avatar -->
                         <div class="bg-gray-50 rounded-lg p-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Avatar</h3>
                             <div class="flex items-start space-x-4">
                                 <img
                                     :src="profileData.image"
@@ -236,13 +260,14 @@
                                 />
                                 <div>
                                     <p class="text-gray-600">
-                                        Created using
+                                        Avatar is created using
                                         <a
                                             href="https://www.dicebear.com/styles/adventurer"
                                             target="_blank"
                                             class="text-purple-600 hover:text-purple-700"
-                                            >DiceBear Adventurer</a
                                         >
+                                            DiceBear Adventurer
+                                        </a>
                                         style
                                     </p>
                                     <p class="text-sm text-gray-500 mt-1">
@@ -253,39 +278,12 @@
                                             href="https://creativecommons.org/licenses/by/4.0/"
                                             target="_blank"
                                             class="text-purple-600 hover:text-purple-700"
-                                            >CC BY 4.0</a
                                         >
+                                            CC BY 4.0
+                                        </a>
                                         license
                                     </p>
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- Icons -->
-                        <div class="bg-gray-50 rounded-lg p-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Icons</h3>
-                            <div class="space-y-2">
-                                <p class="text-gray-600">Icons provided by:</p>
-                                <ul class="list-disc list-inside space-y-1 text-gray-600 ml-4">
-                                    <li>
-                                        <a
-                                            href="https://lucide.dev/"
-                                            target="_blank"
-                                            class="text-purple-600 hover:text-purple-700"
-                                            >Lucide Icons</a
-                                        >
-                                        - UI Icons
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="https://icon-sets.iconify.design/logos/"
-                                            target="_blank"
-                                            class="text-purple-600 hover:text-purple-700"
-                                            >Iconify Logos</a
-                                        >
-                                        - Technology Logos
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -299,21 +297,13 @@
                 <p class="text-center text-gray-500">
                     © {{ new Date().getFullYear() }} {{ profileData.shortName }}. All rights reserved.
                 </p>
-                <p class="text-center text-xs text-gray-400 mt-1">
-                    Avatar by
-                    <a href="https://www.dicebear.com/styles/adventurer" class="hover:text-purple-600"
-                        >Lisa Wischofsky</a
-                    >
-                    /
-                    <a href="https://creativecommons.org/licenses/by/4.0/" class="hover:text-purple-600">CC BY 4.0</a>
-                </p>
             </div>
         </footer>
     </div>
 </template>
 
 <script setup>
-    import { ref, onMounted, onUnmounted, watch } from "vue"
+    import { ref, onMounted, onUnmounted, watch, computed } from "vue"
 
     const profileData = {
         name: "Ivy Marie Quito",
@@ -324,13 +314,119 @@
         location: "Cebu City, Philippines",
         image: "https://api.dicebear.com/9.x/adventurer/svg?seed=Kingston&flip=true&glasses=variant02,variant04&glassesProbability=100&hair=long06&hairColor=0e0e0e,562306",
         description:
-            "Hey there! I am a Senior Frontend Developer with 10 years of experience in the industry, for the last 6 years I found myself enjoying the journey on specializing in the frontend side of the development. I really enjoy developing user-friendly web applications with the focus on user-centric experiences that helps clients grow their business, reaching more people and making their business more successful.",
+            "Hello! I'm a Senior Frontend Developer with 10 years of experience in the industry. Over the past 6 years, I’ve discovered a true passion for frontend development—crafting intuitive, user-friendly web applications that put people at the center of the experience. I take pride in writing clean, efficient code and enjoy the process of turning ideas into seamless digital solutions. My goal is to help clients grow by creating thoughtful, engaging interfaces that reach more users and support long-term success.<br/><br/>Beyond the screen, my Christian faith shapes how I live, work, and treat others. It’s where I draw my moral compass, my commitment to integrity, and my desire to do work that uplifts and serves.<br/><br/>Lately, I’ve been spending more time on creative pursuits that feel meaningful to me—like writing poetry, capturing moments through photography, and sharing my thoughts through blogging. These creative outlets fuel my passion for building thoughtful digital experiences—feel free to explore the projects tab to see that in action.",
         linkedin: "https://www.linkedin.com/in/iam-ivyquito"
     }
     const activeTab = ref("about")
     const isHeaderVisible = ref(true)
     const originalHeader = ref(null)
     const openMenu = ref(false)
+    const showMoreExperience = ref(false)
+
+    const tabs = [
+        { id: "about", name: "About" },
+        { id: "projects", name: "Projects" },
+        { id: "contact", name: "Contact" },
+        { id: "credits", name: "Credits" }
+    ]
+
+    const skills = [
+        "Vuejs",
+        "Node",
+        "TypeScript",
+        "JavaScript",
+        "JQuery",
+        "Ajax",
+        "Pinia",
+        "Vuex",
+        "Lodash.js",
+        "HTML",
+        "S/CSS",
+        "Wordpress",
+        "RestfulAPI",
+        "NuxtJS",
+        "Vuetify",
+        "Bootstrap",
+        "TailwindCSS",
+        "RestfulAPI",
+        "Github",
+        "Jira",
+        "Kanban",
+        "Confluence",
+        "Agile Methodology",
+        "AirBnB Coding standard"
+    ]
+
+    const softSkills = [
+        "Effective Communication",
+        "Teamwork",
+        "Adaptability",
+        "Problem Solving",
+        "Critical Thinking",
+        "Accountability",
+        "Initiative",
+        "Active Listening",
+        "Collaboration",
+        "Empathy"
+    ]
+
+    const experiences = [
+        {
+            title: "Senior Frontend Developer - Full Scale Teams",
+            duration: "2019 - Present",
+            description:
+                "Worked on multiple projects with different clients, using Vue.js and Node.js. Maintained and updated the technical logic for the optimization of the website. Leveraging the latest technologies and best practices to ensure the website is fast, secure, and scalable."
+        },
+        {
+            title: "Senior Frontend Developer/Contractor - ZEA Informatique Inc.",
+            duration: "2023 - 2024",
+            description:
+                "Led the development of a web application reservation system for clients in the hospitality industry. Leveraging the the use of Component libraries like Vuetify that are used to create a consistent and professional look and feel for the website."
+        },
+        {
+            title: "Software Developer - Vauldex Inc",
+            duration: "2016 - 2019",
+            description:
+                "Handled the development of the company's support website and other internal tools. Maintained and updated the website content."
+        },
+        {
+            title: "Wordpress Developer - Proweaver Inc.",
+            duration: "2016 - 2016",
+            description:
+                "Focused on developing & converting complex Xara files into fully responsive WordPress CMS websites."
+        },
+        {
+            title: "Junior Software Engineer - IXBase Inc.",
+            duration: "2015 - 2016",
+            description:
+                "Spearheaded the development of a comprehensive POS Web Application System tailored for local small to medium businesses."
+        },
+        {
+            title: "PHP Developer - OutSourceSG",
+            duration: "2015 - 2015",
+            description: "Engineered a comprehensive system integrator utilizing PHP, MySQL, and JavaScript."
+        }
+    ]
+
+    const toListExperience = computed(() => {
+        if (showMoreExperience.value) {
+            return experiences
+        }
+
+        return experiences.slice(0, 3)
+    })
+
+    const clickOutBound = e => {
+        e.preventDefault()
+        const menuIcon = e.target.closest(".menu-icon")
+        const menuButton = e.target.closest("#menu-button")
+
+        if (!!menuButton || !!menuIcon) {
+            openMenu.value = !openMenu.value
+        } else {
+            if (openMenu.value) openMenu.value = false
+        }
+    }
 
     onMounted(() => {
         const observer = new IntersectionObserver(
@@ -347,121 +443,16 @@
             observer.observe(originalHeader.value)
         }
 
-        onUnmounted(() => {
-            if (originalHeader.value) {
-                observer.unobserve(originalHeader.value)
-            }
-        })
+        document.querySelector("body").addEventListener("click", clickOutBound)
     })
 
-    const tabs = [
-        { id: "about", name: "About" },
-        // { id: "skills", name: "Skills" },
-        { id: "projects", name: "Projects" },
-        { id: "contact", name: "Contact" },
-        { id: "credits", name: "Credits" }
-    ]
-
-    const skills = [
-        { name: "Vue.js", icon: "logos:vue", bgColor: "bg-emerald-500" },
-        { name: "TypeScript", icon: "logos:typescript-icon", bgColor: "bg-blue-600" },
-        { name: "Node.js", icon: "logos:nodejs", bgColor: "bg-green-600" },
-        { name: "Javascript", icon: "logos:javascript", bgColor: "bg-yellow-500" },
-        { name: "Git", icon: "logos:git-icon", bgColor: "bg-red-500" }
-    ]
-
-    const softSkills = [
-        { name: "Communication", icon: "logos:communication", bgColor: "bg-purple-500" },
-        { name: "Teamwork", icon: "logos:teamwork", bgColor: "bg-blue-500" },
-        { name: "Problem Solving", icon: "logos:problem-solving", bgColor: "bg-green-500" },
-        { name: "Adaptability", icon: "logos:adaptability", bgColor: "bg-yellow-500" }
-    ]
-
-    const experiences = [
-        {
-            title: "Senior Frontend Developer - Full Scale Teams",
-            duration: "2019 - Present",
-            description:
-                "Worked on multiple projects with different clients, using Vue.js and Node.js. Maintained and updated the technical logic for the optimization of the website. Leveraging the latest technologies and best practices to ensure the website is fast, secure, and scalable.",
-            technologies: [
-                "Vue",
-                "Node",
-                "TypeScript",
-                "TailwindCSS",
-                "JQuery",
-                "Pinia",
-                "Lodash.js",
-                "Github",
-                "HTML",
-                "S/CSS",
-                "Wordpress",
-                "Ajax",
-                "RestfulAPI",
-                "NuxtJS",
-                "Vuetify",
-                "Bootstrap",
-                "RestfulAPI"
-            ]
-        },
-        {
-            title: "Senior Frontend Developer/Contractor - ZEA Informatique Inc.",
-            duration: "2023 - 2024",
-            description:
-                "Led the development of a web application reservation system for clients in the hospitality industry. Leveraging the the use of Component libraries like Vuetify that are used to create a consistent and professional look and feel for the website.",
-            technologies: [
-                "Vue",
-                "Vuetify",
-                "JavaScript",
-                "REST API",
-                "JQuery",
-                "Pinia",
-                "Typescript",
-                "S/CSS",
-                "Github",
-                "Lodash.js",
-                "Node.js",
-                "HTML"
-            ]
-        },
-        {
-            title: "Software Developer - Vauldex Inc",
-            duration: "2016 - 2019",
-            description:
-                "Handled the development of the company's support website and other internal tools. Maintained and updated the website content.",
-            technologies: [
-                "Vue",
-                "JavaScript",
-                "HTML5",
-                "S/CSS",
-                "JQuery",
-                "GitLab",
-                "Lodash.js",
-                "Vuetify",
-                "Node.js",
-                "PostgreSQL"
-            ]
-        },
-        {
-            title: "Wordpress Developer - Proweaver Inc.",
-            duration: "2016 - 2016",
-            description:
-                "Focused on developing & converting complex Xara files into fully responsive WordPress CMS websites.",
-            technologies: ["WordPress", "HTML", "JavaScript", "CSS"]
-        },
-        {
-            title: "Junior Software Engineer - IXBase Inc.",
-            duration: "2015 - 2016",
-            description:
-                "Spearheaded the development of a comprehensive POS Web Application System tailored for local small to medium businesses.",
-            technologies: ["PHP", "MySQL", "JavaScript", "jQuery", "HTML", "CSS"]
-        },
-        {
-            title: "PHP Developer - OutSourceSG",
-            duration: "2015 - 2015",
-            description: "Engineered a comprehensive system integrator utilizing PHP, MySQL, and JavaScript.",
-            technologies: ["PHP", "HTML", "JavaScript", "MySQL", "Database Structure", "Ajax"]
+    onUnmounted(() => {
+        if (originalHeader.value) {
+            observer.unobserve(originalHeader.value)
         }
-    ]
+
+        document.querySelector("body").removeEventListener("click", clickOutBound)
+    })
 
     watch(
         () => isHeaderVisible.value,
