@@ -4,23 +4,24 @@
             <div class="grid grid-cols-2 text-center justify-center items-center min-h-[700px]">
                 <div class="lg:max-w-[360px] lg:m-auto">
                     <h2 class="text-2xl text-semibold">Hi there, I'm Ivy Quito!</h2>
-                    <h3 class="text-xl">
-                        A <span class="highlight">specializing FrontEnd Developer</span> with over 10 years of
-                        experience in the IT industry.
+                    <h3 class="text-lg">
+                        Frontend developer who values clean code, meaningful work, and afternoon coffee. I build
+                        user-friendly experiences with integrity, guided by faith, poetry, and a heart to help others.
                     </h3>
-                    <p class="py-3 text-lg flex item-center justify-center">
+                    <p class="py-3 text flex item-center justify-center">
                         <IconWrapper name="lucide:map-pin-house" icon-class="size-5 mr-2" />
                         Cebu City, PH
                     </p>
+                    <hr class="my-8" />
                     <div class="social-media flex item-center justify-center gap-4">
-                        <NuxtLink
-                            v-for="socials in socilaLinks"
-                            :key="socials.id"
-                            target="_blank"
-                            class="text-blue-600 hover:scale-125 transition duration-150 ease-in-out"
-                        >
-                            <IconWrapper :name="socials.icon" icon-class="size-6 mr-2" />
-                        </NuxtLink>
+                        <template v-for="link in socilaLinks" :key="link.id">
+                            <button
+                                class="text-blue-600 hover:scale-125 transition duration-150 ease-in-out"
+                                @click.prevent="openLink(link.url)"
+                            >
+                                <IconWrapper :name="link.icon" icon-class="size-6 mr-2" />
+                            </button>
+                        </template>
                     </div>
                 </div>
                 <div class="p-3 bg-slate rounded-full border-b border-grey">
@@ -176,9 +177,12 @@
     })
 
     const handleChangeTab = (tab: Tab) => {
-        console.log(tab, "tabg")
         activeTab.value = tab.id
         activeTabComponent.value = tab.component
+    }
+
+    const openLink = (url: string) => {
+        window.open(url, "")
     }
 </script>
 
