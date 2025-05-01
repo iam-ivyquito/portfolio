@@ -1,25 +1,78 @@
 <template>
-    <main class="contaner">
-        <!-- <div id="sidepanel" class="border border-2 col-auto">this is the side stuff</div> -->
-        <seciton id="_display-content">
-            <template class="flex items-center space-x-4 justify-start">
-                <Icon
-                    name="lucide:square-user-round"
-                    class="size-12 text-purple-600 mb-4 animate-wiggle animate-twice"
-                />
-                <h1 class="text-2xl">About me</h1>
-            </template>
-            <Experience />
+    <main class="h-100">
+        <section id="introduction" class="py-6 block mx-auto md:max-w-[1248px]">
+            <div class="grid grid-cols-2 text-center justify-center items-center min-h-[700px]">
+                <div class="lg:max-w-[360px] lg:m-auto">
+                    <h2 class="text-2xl text-semibold">Hi there, I'm Ivy Quito!</h2>
+                    <h3 class="text-xl">
+                        A <span class="highlight">specializing FrontEnd Developer</span> with over 10 years of
+                        experience in the IT industry.
+                    </h3>
+                    <p class="py-3 text-lg flex item-center justify-center">
+                        <IconWrapper name="lucide:map-pin-house" icon-class="size-5 mr-2" />
+                        Cebu City, PH
+                    </p>
+                    <div class="social-media flex item-center justify-center gap-4">
+                        <NuxtLink
+                            v-for="socials in socilaLinks"
+                            :key="socials.id"
+                            target="_blank"
+                            class="text-blue-600 hover:scale-125 transition duration-150 ease-in-out"
+                        >
+                            <IconWrapper :name="socials.icon" icon-class="size-6 mr-2" />
+                        </NuxtLink>
+                    </div>
+                </div>
+                <div class="p-3 bg-slate rounded-full border-b border-grey">
+                    <img
+                        src="https://images.pexels.com/photos/14935859/pexels-photo-14935859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        class="rounded-full size-[800px] m-auto"
+                    />
+                </div>
+            </div>
+        </section>
+        <seciton id="experience-techstack" class="block mx-auto md:max-w-[1248px] my-[3rem]">
+            <div class="card bg-slate-50 p-6 rounded-lg">
+                <header>
+                    <nav class="rounded-md bg-gradient-to-r from-purple-600 to-blue-600 p-2">
+                        <button
+                            v-for="tab in tabs"
+                            :key="tab.id"
+                            :class="[
+                                'px-4 w-[50%] py-2 text-sm transition-colors rounded-md transition-all transition-discrete',
+                                activeTab === tab.id ? 'bg-gray-200 text-black' : 'text-white'
+                            ]"
+                            @click.prevent="handleChangeTab(tab)"
+                        >
+                            {{ tab.label }}
+                        </button>
+                    </nav>
+                </header>
+
+                <component :is="activeTabComponent" class="my-6 space-y-6" />
+            </div>
         </seciton>
     </main>
 </template>
 
 <script lang="ts" setup>
+    import IconWrapper from "~/components/IconWrapper.vue"
+    import TechStack from "~/components/about/TechStack.vue"
     import Experience from "~/components/about/Experience.vue"
-    // import {PersonStanding}
 
-    const activeTab = ref("about")
+    interface Tab {
+        id: string
+        label: string
+        component: Component
+    }
+
+    const activeTab = ref("experience")
     const showMoreExperience = ref(false)
+    const activeTabComponent = ref<Component>(Experience)
+    const tabs = [
+        { id: "experience", label: "Experience", component: Experience },
+        { id: "techstack", label: "Tech Stack", component: TechStack }
+    ] as Tab[]
 
     const profileData = {
         name: "Ivy Marie Quito",
@@ -112,6 +165,8 @@
         }
     ]
 
+    const socilaLinks = [{ id: "linkedin", icon: "lucide:linkedin", url: "https://www.linkedin.com/in/iam-ivyquito" }]
+
     const toListExperience = computed(() => {
         if (showMoreExperience.value) {
             return experiences
@@ -119,6 +174,12 @@
 
         return experiences.slice(0, 3)
     })
+
+    const handleChangeTab = (tab: Tab) => {
+        console.log(tab, "tabg")
+        activeTab.value = tab.id
+        activeTabComponent.value = tab.component
+    }
 </script>
 
 <style lang="css">

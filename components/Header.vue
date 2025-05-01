@@ -1,24 +1,22 @@
 <template>
     <header>
-        <div class="bg-gradient-to-r from-purple-600 to-blue-600 h-[600px]" />
+        <div class="bg-gradient-to-r from-purple-600 to-blue-600 h-[100px]" />
         <div
-            class="fixed top-0 left-0 right-0 transform transition-transform duration-300 z-50 translate-y-0 rounded-lg bg-white p-1 shadow-sm mx-3 my-4"
+            class="fixed top-0 left-0 right-0 transform transition-transform duration-300 z-50 translate-y-0 rounded-lg bg-white shadow-sm mx-3 my-4"
         >
-            <div class="px-4 sm:px-6 lg:px-8 py-2">
+            <div class="px-4 py-2">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-4">
                         <img
-                            class="size-[64px] rounded-full border-2 border-white shadow"
+                            class="size-[52px] rounded-full border-2 border-white shadow"
                             src="https://api.dicebear.com/9.x/adventurer/svg?seed=Kingston&flip=true&glasses=variant02,variant04&glassesProbability=100&hair=long06&hairColor=0e0e0e,562306"
                             alt="Profile Picture"
                         />
-                        <div>
-                            <h2 class="text-lg font-semibold text-gray-900">
-                                <span class="hidden sm:inline">Ivy Marie Quito</span>
-                                <span class="sm:hidden">iMQ</span>
-                            </h2>
-                            <!-- <h3 class="text-gray-700">Frontend Developer</h3> -->
-                        </div>
+                        <h2 class="text-2xl text-black">
+                            <span class="font-semibold"><</span>
+                            <span class="text-yellow-400 font-bold">i</span>
+                            <span class="font-semibold">MQ /></span>
+                        </h2>
                     </div>
                     <nav class="flex md:hidden space-x-2">
                         <div class="relative inline-block text-left">
@@ -46,13 +44,16 @@
                                     <button
                                         v-for="tab in tabs"
                                         :key="tab.id"
-                                        @click="handleTabSelect(tab)"
+                                        @click.prevent="handleTabSelect(tab)"
                                         :class="[
                                             'block px-4 py-2 text-sm text-gray-700 w-full text-left',
                                             { 'bg-purple-600 text-white': activeTab === tab.id }
                                         ]"
                                     >
-                                        {{ tab.name }}
+                                        <template class="flex item-center">
+                                            <IconWrapper :name="tab.icon" icon-class="size-5 mr-2" />
+                                            <p class="mb-0">{{ tab.name }}</p>
+                                        </template>
                                     </button>
                                 </div>
                             </div>
@@ -81,10 +82,12 @@
 
 <script lang="ts" setup>
     import { ref, defineProps, onMounted, onUnmounted, watch, computed, defineEmits } from "vue"
+    import IconWrapper from "./IconWrapper.vue"
 
     interface TabType {
         id: string
         name: string
+        icon: string
     }
 
     const openMenu = ref(false)
@@ -95,10 +98,9 @@
     const emit = defineEmits(["change-tab"])
 
     const tabs = [
-        { id: "", name: "About" },
-        { id: "projects", name: "Projects" },
-        // { id: "contact", name: "Contact" },
-        { id: "credits", name: "Credits" }
+        { id: "", name: "About", icon: "lucide:square-user-round" },
+        { id: "projects", name: "Projects", icon: "lucide:layers-2" }
+        // { id: "credits", name: "Credits", icon: "" }
     ] as TabType[]
 
     const clickOutBound = (e: any) => {
@@ -115,7 +117,6 @@
 
     const handleTabSelect = (tab: TabType) => {
         activeTab.value = tab.id
-        console.log(tab, "tab change")
     }
 
     onMounted(() => {
