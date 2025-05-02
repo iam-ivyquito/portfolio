@@ -26,11 +26,10 @@
                         </template>
                     </div>
                 </div>
-                <div class="p-3 border border-purple-600 lg:border-blue-600 mt-6 lg:mt-0">
-                    <img
-                        src="https://images.pexels.com/photos/14935859/pexels-photo-14935859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        class="w-100 h-[800px] lg:size-[100%] m-auto"
-                    />
+                <div
+                    class="mt-6 lg:mt-0 bg-[url(/img/imq.jpeg)] bg-cover bg-center w-100 transition duration-1000 ease-in-out h-[100px] hover:h-[600px] drop-shadow-lg rounded-lg"
+                >
+                    <div class="drop-shadow-lg w-100 h-[inherit] bg-black/30" />
                 </div>
             </div>
         </section>
