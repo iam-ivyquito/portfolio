@@ -1,18 +1,20 @@
 <template>
     <main class="h-100">
-        <section id="introduction" class="py-6 block mx-auto md:max-w-[1248px]">
-            <div class="grid grid-cols-2 text-center justify-center items-center min-h-[700px]">
+        <section id="introduction" class="py-6 block mx-6 xl:mx-auto md:max-w-[1248px]">
+            <div
+                class="grid grid-cols-1 lg:grid-cols-2 text-center justify-center items-center min-h-[700px] dark:text-gray-200 ligth:text-gray-800"
+            >
                 <div class="lg:max-w-[360px] lg:m-auto">
                     <h2 class="text-2xl text-semibold">Hi there, I'm Ivy Quito!</h2>
                     <h3 class="text-lg">
-                        Frontend developer who values clean code, meaningful work, and afternoon coffee. I build
-                        user-friendly experiences with integrity, guided by faith, poetry, and a heart to help others.
+                        I'm a frontend developer devoted to crafting responsive, high-performing designs—guided by clean
+                        code, unwavering ethics, and a God-centered purpose that brings meaning to every project.
                     </h3>
-                    <p class="py-3 text flex item-center justify-center">
+                    <p class="mt-2 py-3 text flex item-center justify-center">
                         <IconWrapper name="lucide:map-pin-house" icon-class="size-5 mr-2" />
                         Cebu City, PH
                     </p>
-                    <hr class="my-8" />
+                    <hr class="my-6" />
                     <div class="social-media flex item-center justify-center gap-4">
                         <template v-for="link in socilaLinks" :key="link.id">
                             <button
@@ -24,15 +26,15 @@
                         </template>
                     </div>
                 </div>
-                <div class="p-3 bg-slate rounded-full border-b border-grey">
+                <div class="p-3 border border-purple-600 lg:border-blue-600 mt-6 lg:mt-0">
                     <img
                         src="https://images.pexels.com/photos/14935859/pexels-photo-14935859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        class="rounded-full size-[800px] m-auto"
+                        class="w-100 h-[800px] lg:size-[100%] m-auto"
                     />
                 </div>
             </div>
         </section>
-        <seciton id="experience-techstack" class="block mx-auto md:max-w-[1248px] my-[3rem]">
+        <seciton id="experience-techstack" class="block mx-4 xl:mx-auto md:max-w-[1248px] my-[3rem]">
             <div class="card bg-slate-50 p-6 rounded-lg">
                 <header>
                     <nav class="rounded-md bg-gradient-to-r from-purple-600 to-blue-600 p-2">
@@ -41,7 +43,7 @@
                             :key="tab.id"
                             :class="[
                                 'px-4 w-[50%] py-2 text-sm transition-colors rounded-md transition-all transition-discrete',
-                                activeTab === tab.id ? 'bg-gray-200 text-black' : 'text-white'
+                                activeTab === tab.id ? 'bg-gray-200 text-black font-semibold' : 'text-white'
                             ]"
                             @click.prevent="handleChangeTab(tab)"
                         >
@@ -58,7 +60,7 @@
 
 <script lang="ts" setup>
     import IconWrapper from "~/components/IconWrapper.vue"
-    import TechStack from "~/components/about/TechStack.vue"
+    import SkillSet from "~/components/about/SkillSet.vue"
     import Experience from "~/components/about/Experience.vue"
 
     interface Tab {
@@ -72,7 +74,7 @@
     const activeTabComponent = ref<Component>(Experience)
     const tabs = [
         { id: "experience", label: "Experience", component: Experience },
-        { id: "techstack", label: "Tech Stack", component: TechStack }
+        { id: "skillset", label: "Skills", component: SkillSet }
     ] as Tab[]
 
     const profileData = {
@@ -166,7 +168,14 @@
         }
     ]
 
-    const socilaLinks = [{ id: "linkedin", icon: "lucide:linkedin", url: "https://www.linkedin.com/in/iam-ivyquito" }]
+    const socilaLinks = [
+        {
+            id: "linkedin",
+            name: "LinkedIn Profile",
+            icon: "lucide:linkedin",
+            url: "https://www.linkedin.com/in/iam-ivyquito"
+        }
+    ]
 
     const toListExperience = computed(() => {
         if (showMoreExperience.value) {
@@ -187,18 +196,13 @@
 </script>
 
 <style lang="css">
-    #sidepanel {
-        height: 100%;
-        min-height: 91vh;
-        position: fixed;
-        min-width: 450px;
-        top: 0;
-        bottom: 0;
-    }
-
-    #_display-content {
-        position: relative;
-        display: block;
-        padding: 2rem 2rem 6rem;
+    section#introduction > div::before {
+        position: absolute;
+        content: "";
+        /* background-color: #42b883; */
+        width: 100%;
+        height: 46rem;
+        right: 0;
+        z-index: -1;
     }
 </style>
