@@ -7,7 +7,7 @@
                 :key="skill.name"
                 class="grid grid-cols-1 place-items-center space-x-2 px-4 py-2 gap-2 group"
             >
-                <div class="size-[70px] block bg-cover bg-center" :style="`background-image: url(/svg/${skill.img})`">
+                <div class="size-[70px] block bg-cover bg-center" :style="`background-image: url(./svg/${skill.img})`">
                     <div
                         class="bg-black/80 backdrop-grayscale h-[inherit] rounded-lg flex place-items-center group-hover:backdrop-grayscale-0 group-hover:bg-black/0 transition duration-200 ease-in-out"
                     >
