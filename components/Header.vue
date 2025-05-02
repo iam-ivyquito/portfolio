@@ -1,24 +1,18 @@
 <template>
     <header>
         <div class="bg-gradient-to-r from-purple-600 to-blue-600 h-[100px]" />
-        <div class="grid grid-cols-[1fr_60px] place-items-center fixed top-0 left-5 right-5 gap-3">
-            <div class="z-50 rounded-lg bg-white shadow-sm mx-3 my-4 min-w-[100%]">
+        <div class="grid grid-cols-[1fr_60px] place-items-center fixed top-0 left-5 right-5 gap-3 z-50">
+            <div class="rounded-lg bg-white shadow-sm mx-3 my-4 min-w-[100%] shadow-xl">
                 <div class="px-4 py-2">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-4">
-                            <!-- <img
-                            class="size-[52px] rounded-full border-2 border-white shadow"
-                            src="https://api.dicebear.com/9.x/adventurer/svg?seed=Kingston&flip=true&glasses=variant02,variant04&glassesProbability=100&hair=long06&hairColor=0e0e0e,562306"
-                            alt="Profile Picture"
-                        /> -->
                             <h2 class="text-2xl text-black">
                                 <span class="font-semibold"><</span>
                                 <span class="text-yellow-400 font-bold">i</span>
                                 <span class="font-semibold">MQ /></span>
                             </h2>
                         </div>
-                        <!-- <div class="navigation-action-holder flex item-center h-[45px] gap-6"> -->
-                        <nav class="flex md:hidden space-x-2">
+                        <nav class="flex md:hidden space-x-2 z-50">
                             <div class="relative inline-block text-left">
                                 <div>
                                     <button
@@ -41,20 +35,21 @@
                                     tabindex="-1"
                                 >
                                     <div class="py-1" role="none">
-                                        <button
+                                        <NuxtLink
                                             v-for="tab in tabs"
                                             :key="tab.id"
                                             @click.prevent="handleTabSelect(tab)"
+                                            :to="`/${tab.id}`"
                                             :class="[
                                                 'block px-4 py-2 text-sm text-gray-700 w-full text-left',
                                                 { 'bg-purple-600 text-white': activeTab === tab.id }
                                             ]"
                                         >
                                             <template class="flex item-center">
-                                                <IconWrapper :name="tab.icon" icon-class="size-5 mr-2" />
+                                                <Icon :name="tab.icon" class="size-5 mr-2" />
                                                 <p class="mb-0">{{ tab.name }}</p>
                                             </template>
-                                        </button>
+                                        </NuxtLink>
                                     </div>
                                 </div>
                             </div>
@@ -76,11 +71,10 @@
                                 {{ tab.name }}
                             </NuxtLink>
                         </nav>
-                        <!-- </div> -->
                     </div>
                 </div>
             </div>
-            <div class="rounded-lg my-4">
+            <div class="rounded-full my-4 shadow-xl">
                 <img
                     class="size-[52px] rounded-full border-2 border-white shadow"
                     src="https://api.dicebear.com/9.x/adventurer/svg?seed=Kingston&flip=true&glasses=variant02,variant04&glassesProbability=100&hair=long06&hairColor=0e0e0e,562306"

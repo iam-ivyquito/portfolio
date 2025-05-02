@@ -1,35 +1,42 @@
 <template>
-    <main class="h-100">
-        <section id="introduction" class="py-6 block mx-6 xl:mx-auto md:max-w-[1248px]">
+    <main class="mb-6">
+        <section id="introduction" class="block mx-6">
             <div
-                class="grid grid-cols-1 lg:grid-cols-2 text-center justify-center items-center min-h-[700px] dark:text-gray-200 ligth:text-gray-800"
+                class="grid grid-cols-1 text-center justify-center items-center min-h-[91vh] dark:text-gray-200 ligth:text-gray-800 xl:mx-auto md:max-w-[1248px]"
             >
-                <div class="lg:max-w-[360px] lg:m-auto">
-                    <h2 class="text-2xl text-semibold">Hi there, I'm Ivy Quito!</h2>
-                    <h3 class="text-lg">
-                        I'm a frontend developer devoted to crafting responsive, high-performing designs—guided by clean
-                        code, unwavering ethics, and a God-centered purpose that brings meaning to every project.
-                    </h3>
-                    <p class="mt-2 py-3 text flex item-center justify-center">
-                        <IconWrapper name="lucide:map-pin-house" icon-class="size-5 mr-2" />
-                        Cebu City, PH
+                <div class="lg:m-auto">
+                    <p class="text-2xl text-semibold">Hello, I'm Ivy!</p>
+                    <p class="text-[50px] sm:text-[60px] md:text-[70px] py-6">
+                        I'm a Senior Frontend Developer—fueled by faith
+                        <span class="highlight">& instant coffee,</span> crafting responsive, user-friendly designs one
+                        code block at a time.
+                    </p>
+                    <p class="flex place-items-center justify-center">
+                        <IconWrapper name="lucide:map-pin" icon-class="size-5 mr-2 text-red-500" />
+                        <span class="text-lg">CEBU CITY, PH</span>
                     </p>
                     <hr class="my-6" />
                     <div class="social-media flex item-center justify-center gap-4">
                         <template v-for="link in socilaLinks" :key="link.id">
                             <button
-                                class="text-blue-600 hover:scale-125 transition duration-150 ease-in-out"
+                                class="border rounded-full px-3 py-2 hover:skew-y-12 transition duration-150 ease-in-out"
+                                :style="`color: ${link.color}; border-color: ${link.color}`"
                                 @click.prevent="openLink(link.url)"
                             >
-                                <IconWrapper :name="link.icon" icon-class="size-6 mr-2" />
+                                <IconWrapper :name="link.icon" icon-class="size-6" />
                             </button>
                         </template>
+                        <button
+                            class="border border-purple-600 py-1 px-6 text-purple-600 rounded-full flex items-center gap-4 transition duration-150 ease-in-out group hover:bg-purple-600"
+                            @click.prevent="handleDownloadCV"
+                        >
+                            <IconWrapper
+                                name="lucide:download"
+                                icon-class="size-6 group-hover:animate-bounce group-hover:text-white"
+                            />
+                            <span class="text-lg group-hover:text-white">Download my CV</span>
+                        </button>
                     </div>
-                </div>
-                <div
-                    class="mt-6 lg:mt-0 bg-[url(/img/imq.jpeg)] bg-cover bg-center w-100 transition duration-1000 ease-in-out h-[100px] hover:h-[600px] drop-shadow-lg rounded-lg"
-                >
-                    <div class="drop-shadow-lg w-100 h-[inherit] bg-black/30" />
                 </div>
             </div>
         </section>
@@ -51,7 +58,7 @@
                     </nav>
                 </header>
 
-                <component :is="activeTabComponent" class="my-6 space-y-6" />
+                <component :is="activeTabComponent" class="m-3 md:m-6" />
             </div>
         </seciton>
     </main>
@@ -73,116 +80,18 @@
     const activeTabComponent = ref<Component>(Experience)
     const tabs = [
         { id: "experience", label: "Experience", component: Experience },
-        { id: "skillset", label: "Skills", component: SkillSet }
+        { id: "skillset", label: "Skill", component: SkillSet }
     ] as Tab[]
-
-    const profileData = {
-        name: "Ivy Marie Quito",
-        shortName: "IQuito",
-        title: "Senior Frontend Developer",
-        username: "iam.ivyquito",
-        email: "iam.ivyquito@gmail.com",
-        location: "Cebu City, Philippines",
-        image: "https://api.dicebear.com/9.x/adventurer/svg?seed=Kingston&flip=true&glasses=variant02,variant04&glassesProbability=100&hair=long06&hairColor=0e0e0e,562306",
-        description:
-            "Hello! I'm a Senior Frontend Developer with 10 years of experience in the industry. Over the past 6 years, I’ve discovered a true passion for frontend development—crafting intuitive, user-friendly web applications that put people at the center of the experience. I take pride in writing clean, efficient code and enjoy the process of turning ideas into seamless digital solutions. My goal is to help clients grow by creating thoughtful, engaging interfaces that reach more users and support long-term success.<br/><br/>Beyond the screen, my Christian faith shapes how I live, work, and treat others. It’s where I draw my moral compass, my commitment to integrity, and my desire to do work that uplifts and serves.<br/><br/>Lately, I’ve been spending more time on creative pursuits that feel meaningful to me—like writing poetry, capturing moments through photography, and sharing my thoughts through blogging. These creative outlets fuel my passion for building thoughtful digital experiences—feel free to explore the projects tab to see that in action.",
-        linkedin: "https://www.linkedin.com/in/iam-ivyquito"
-    }
-
-    const skills = [
-        "Vuejs",
-        "Node",
-        "TypeScript",
-        "JavaScript",
-        "JQuery",
-        "Ajax",
-        "Pinia",
-        "Vuex",
-        "Lodash.js",
-        "HTML",
-        "S/CSS",
-        "Wordpress",
-        "RestfulAPI",
-        "NuxtJS",
-        "Vuetify",
-        "Bootstrap",
-        "TailwindCSS",
-        "RestfulAPI",
-        "Github",
-        "Jira",
-        "Kanban",
-        "Confluence",
-        "Agile Methodology",
-        "AirBnB Coding standard"
-    ]
-
-    const softSkills = [
-        "Effective Communication",
-        "Teamwork",
-        "Adaptability",
-        "Problem Solving",
-        "Critical Thinking",
-        "Accountability",
-        "Initiative",
-        "Active Listening",
-        "Collaboration",
-        "Empathy"
-    ]
-
-    const experiences = [
-        {
-            title: "Senior Frontend Developer - Full Scale Teams",
-            duration: "2019 - Present",
-            description:
-                "Worked on multiple projects with different clients, using Vue.js and Node.js. Maintained and updated the technical logic for the optimization of the website. Leveraging the latest technologies and best practices to ensure the website is fast, secure, and scalable."
-        },
-        {
-            title: "Senior Frontend Developer/Contractor - ZEA Informatique Inc.",
-            duration: "2023 - 2024",
-            description:
-                "Led the development of a web application reservation system for clients in the hospitality industry. Leveraging the the use of Component libraries like Vuetify that are used to create a consistent and professional look and feel for the website."
-        },
-        {
-            title: "Software Developer - Vauldex Inc",
-            duration: "2016 - 2019",
-            description:
-                "Handled the development of the company's support website and other internal tools. Maintained and updated the website content."
-        },
-        {
-            title: "Wordpress Developer - Proweaver Inc.",
-            duration: "2016 - 2016",
-            description:
-                "Focused on developing & converting complex Xara files into fully responsive WordPress CMS websites."
-        },
-        {
-            title: "Junior Software Engineer - IXBase Inc.",
-            duration: "2015 - 2016",
-            description:
-                "Spearheaded the development of a comprehensive POS Web Application System tailored for local small to medium businesses."
-        },
-        {
-            title: "PHP Developer - OutSourceSG",
-            duration: "2015 - 2015",
-            description: "Engineered a comprehensive system integrator utilizing PHP, MySQL, and JavaScript."
-        }
-    ]
 
     const socilaLinks = [
         {
             id: "linkedin",
             name: "LinkedIn Profile",
             icon: "lucide:linkedin",
-            url: "https://www.linkedin.com/in/iam-ivyquito"
+            url: "https://www.linkedin.com/in/iam-ivyquito",
+            color: "#2563eb"
         }
     ]
-
-    const toListExperience = computed(() => {
-        if (showMoreExperience.value) {
-            return experiences
-        }
-
-        return experiences.slice(0, 3)
-    })
 
     const handleChangeTab = (tab: Tab) => {
         activeTab.value = tab.id
@@ -192,13 +101,25 @@
     const openLink = (url: string) => {
         window.open(url, "")
     }
+
+    const handleDownloadCV = () => {
+        const link = document.createElement("a")
+        link.href = "/cv/iquito.pdf"
+        link.download = "IvyQuito_CV.pdf"
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+    }
 </script>
 
 <style lang="css">
+    section#introduction {
+        background: radial-gradient(ellipse at top, #071628 0%, #000000 100%);
+        background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.04)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+    }
     section#introduction > div::before {
         position: absolute;
         content: "";
-        /* background-color: #42b883; */
         width: 100%;
         height: 46rem;
         right: 0;
