@@ -26,13 +26,9 @@
                                 <IconWrapper :name="link.icon" icon-class="size-6" />
                             </button>
                         </template>
-                        <!-- <button
-                            class="border border-purple-600 py-1 px-6 text-purple-600 rounded-full flex items-center gap-4 transition duration-150 ease-in-out group hover:bg-purple-600"
-                            @click.prevent="handleDownloadCV"
-                        > -->
                         <a
-                            href="/portfolio/cv/iquito.pdf"
-                            download
+                            href="./cv/iquito.pdf"
+                            download=""
                             class="border border-purple-600 py-1 px-6 text-purple-600 rounded-full flex items-center gap-4 transition duration-150 ease-in-out group hover:bg-purple-600"
                         >
                             <IconWrapper
@@ -41,7 +37,6 @@
                             />
                             <span class="text-lg group-hover:text-white">Download my CV</span>
                         </a>
-                        <!-- </button> -->
                     </div>
                 </div>
             </div>
