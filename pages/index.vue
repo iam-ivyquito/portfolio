@@ -26,17 +26,16 @@
                                 <IconWrapper :name="link.icon" icon-class="size-6" />
                             </button>
                         </template>
-                        <a
-                            href="./cv/iquito.pdf"
-                            download=""
+                        <button
                             class="border border-purple-600 py-1 px-6 text-purple-600 rounded-full flex items-center gap-4 transition duration-150 ease-in-out group hover:bg-purple-600"
+                            @click.prevent="handleDownloadCV"
                         >
                             <IconWrapper
                                 name="lucide:download"
                                 icon-class="size-6 group-hover:animate-bounce group-hover:text-white"
                             />
                             <span class="text-lg group-hover:text-white">Download my CV</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -105,11 +104,10 @@
 
     const handleDownloadCV = () => {
         const link = document.createElement("a")
-        link.href = "/cv/iquito.pdf"
+        link.href = "./cv/iquito.pdf"
         link.download = "IvyQuito_CV.pdf"
-        document.body.appendChild(link)
+        link.target = "_blank"
         link.click()
-        document.body.removeChild(link)
     }
 </script>
 
