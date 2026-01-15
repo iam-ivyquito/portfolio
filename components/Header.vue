@@ -6,11 +6,13 @@
                 <div class="px-4 py-2">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-4">
-                            <h2 class="text-2xl text-black">
-                                <span class="font-semibold"><</span>
-                                <span class="text-yellow-400 font-bold">i</span>
-                                <span class="font-semibold">MQ /></span>
-                            </h2>
+                            <NuxtLink to="/" @click.prevent="handleTabSelect()">
+                                <h2 class="text-2xl text-black">
+                                    <span class="font-semibold"><</span>
+                                    <span class="text-yellow-400 font-bold">i</span>
+                                    <span class="font-semibold">MQ /></span>
+                                </h2>
+                            </NuxtLink>
                         </div>
                         <nav class="flex md:hidden space-x-2 z-50">
                             <div class="relative inline-block text-left">
@@ -38,12 +40,12 @@
                                         <NuxtLink
                                             v-for="tab in tabs"
                                             :key="tab.id"
-                                            @click.prevent="handleTabSelect(tab)"
                                             :to="`/${tab.id}`"
                                             :class="[
                                                 'block px-4 py-2 text-sm text-gray-700 w-full text-left',
                                                 { 'bg-purple-600 text-white': activeTab === tab.id }
                                             ]"
+                                            @click.prevent="handleTabSelect(tab)"
                                         >
                                             <template class="flex item-center">
                                                 <Icon :name="tab.icon" class="size-5 mr-2" />
@@ -74,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <div class="rounded-full my-4 shadow-xl">
+            <div class="rounded-full my-4 shadow-xl hover:animate-spin hover:cursor-default">
                 <img
                     class="size-[52px] rounded-full border-2 border-white shadow"
                     src="https://api.dicebear.com/9.x/adventurer/svg?seed=Kingston&flip=true&glasses=variant02,variant04&glassesProbability=100&hair=long06&hairColor=0e0e0e,562306"
@@ -95,7 +97,7 @@
 
 <script lang="ts" setup>
     import { ref, defineProps, onMounted, onUnmounted, watch, computed, defineEmits } from "vue"
-    import IconWrapper from "./IconWrapper.vue"
+    // import IconWrapper from "./IconWrapper.vue"
 
     interface TabType {
         id: string
@@ -129,7 +131,11 @@
         }
     }
 
-    const handleTabSelect = (tab: TabType) => {
+    const handleTabSelect = (tab: TabType | undefined) => {
+        if (!tab) {
+            activeTab.value = ""
+            return
+        }
         activeTab.value = tab.id
     }
 

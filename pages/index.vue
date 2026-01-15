@@ -5,43 +5,43 @@
                 class="grid grid-cols-1 text-center justify-center items-center min-h-[91vh] dark:text-gray-200 ligth:text-gray-800 xl:mx-auto md:max-w-[1248px]"
             >
                 <div class="lg:m-auto">
-                    <p class="text-2xl text-semibold">Hello, I'm Ivy!</p>
+                    <p class="text-2xl text-semibold">Hello, I'm Ivy! 👋🏽</p>
                     <p class="text-[50px] sm:text-[60px] md:text-[70px] py-6">
-                        I'm a Senior Frontend Developer—fueled by faith
-                        <span class="highlight">& instant coffee,</span> crafting responsive, user-friendly designs one
-                        code block at a time.
+                        I'm a Senior Frontend Developer; fueled by faith, God's grace,
+                        <span class="highlight">and (instant) coffee.</span> Crafting responsive, user-friendly designs
+                        one code block at a time.
                     </p>
+                    <hr class="mb-6" />
                     <p class="flex place-items-center justify-center">
-                        <IconWrapper name="lucide:map-pin" icon-class="size-5 mr-2 text-red-500" />
+                        <IconWrapper name="lucide:map-pin" icon-class="size-5 mr-2 text-red-500 animate-ping" />
                         <span class="text-lg">CEBU CITY, PH</span>
                     </p>
-                    <hr class="my-6" />
-                    <div class="social-media flex item-center justify-center gap-4">
-                        <template v-for="link in socilaLinks" :key="link.id">
-                            <button
-                                class="border rounded-full px-3 py-2 hover:skew-y-12 transition duration-150 ease-in-out"
-                                :style="`color: ${link.color}; border-color: ${link.color}`"
-                                @click.prevent="openLink(link.url)"
-                            >
-                                <IconWrapper :name="link.icon" icon-class="size-6" />
-                            </button>
-                        </template>
-                        <button
-                            class="border border-purple-600 py-1 px-6 text-purple-600 rounded-full flex items-center gap-4 transition duration-150 ease-in-out group hover:bg-purple-600"
-                            @click.prevent="handleDownloadCV"
-                        >
-                            <IconWrapper
-                                name="lucide:download"
-                                icon-class="size-6 group-hover:animate-bounce group-hover:text-white"
-                            />
-                            <span class="text-lg group-hover:text-white">Download my CV</span>
-                        </button>
-                    </div>
                 </div>
             </div>
         </section>
         <seciton id="experience-techstack" class="block mx-4 xl:mx-auto md:max-w-[1248px] my-[3rem]">
             <div class="card bg-slate-50 p-6 rounded-lg">
+                <div class="social-media flex item-center justify-end gap-4 mb-6">
+                    <template v-for="link in socilaLinks" :key="link.id">
+                        <button
+                            class="border rounded-full px-3 py-2 transition duration-150 ease-in-out group hover:-translate-y-2 flex align-center"
+                            :style="`color: ${link.color}; border-color: ${link.color}`"
+                            @click.prevent="openLink(link.url)"
+                        >
+                            <IconWrapper :name="link.icon" icon-class="size-6" />
+                        </button>
+                    </template>
+                    <button
+                        class="border border-purple-600 py-1 px-6 text-purple-600 rounded-full flex items-center gap-4 transition duration-150 ease-in-out group hover:bg-purple-600"
+                        @click.prevent="handleDownloadCV"
+                    >
+                        <IconWrapper
+                            name="lucide:download"
+                            icon-class="size-6 group-hover:animate-bounce group-hover:text-white"
+                        />
+                        <span class="text-lg group-hover:text-white">Download my CV</span>
+                    </button>
+                </div>
                 <header>
                     <nav class="rounded-md bg-gradient-to-r from-purple-600 to-blue-600 p-2">
                         <button
@@ -84,6 +84,13 @@
     ] as Tab[]
 
     const socilaLinks = [
+        // {
+        //     id: "instagram",
+        //     name: "IG",
+        //     icon: "lucide:instagram",
+        //     url: "google.com",
+        //     color: "#C13584"
+        // },
         {
             id: "linkedin",
             name: "LinkedIn Profile",

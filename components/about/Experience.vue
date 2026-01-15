@@ -90,9 +90,16 @@
 
     const experiences = [
         {
+            company: "Bridgit (Australia) - Remote",
+            title: "Frontend Developer",
+            duration: "2025 - Present",
+            description:
+                "Developing the company's main product, a web application to bridge the gap between our client's needs to maximize their property's potential. The application is built with Vue.js and Node.js and uses the latest technologies and best practices to ensure the website is fast, secure, and scalable."
+        },
+        {
             company: "Full Scale Teams (Cebu City, PH)",
             title: "Senior Frontend Developer",
-            duration: "2019 - Present",
+            duration: "2019 - 2025",
             description:
                 "Worked on multiple projects with different clients, using Vue.js and Node.js. Maintained and updated the technical logic for the optimization of the website. Leveraging the latest technologies and best practices to ensure the website is fast, secure, and scalable."
         },
